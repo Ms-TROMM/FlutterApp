@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+## Naming conventions 
+- 파일 명 : lowercase_underscore.dart 처럼 네이밍 하기 
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

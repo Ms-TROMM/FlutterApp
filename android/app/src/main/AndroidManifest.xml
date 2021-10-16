@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mstromm.ms_tromm">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="ms_tromm"
         android:icon="@mipmap/ic_launcher">
