@@ -24,8 +24,7 @@ class _StylerPageState extends State<StylerPage> {
         height: MediaQuery.of(context).size.width * 0.4,
         margin: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(color: Colors.black, width: 2)),
+            borderRadius: BorderRadius.circular(25), color: Colors.black12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -34,6 +33,7 @@ class _StylerPageState extends State<StylerPage> {
               style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium),
             ),
             ToggleButtons(
+              fillColor: Colors.white,
               children: const <Widget>[
                 Padding(
                   padding: EdgeInsets.all(8.0),
@@ -47,7 +47,7 @@ class _StylerPageState extends State<StylerPage> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('준비',
+                  child: Text('    준비    ',
                       style: TextStyle(fontSize: MyDimens.FontSize_Medium)),
                 ),
               ],
