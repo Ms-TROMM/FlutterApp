@@ -99,7 +99,7 @@ class _TutorialPageState extends State<TutorialPage>{
     return Container(
       color: Colors.black87,
       height: _boxHeight,
-      child: PageView.builder(
+      child: PageView.builder( // view pager 같은 역할을 한다
           itemCount: _items.length,
           controller: _pageController,
           itemBuilder: (BuildContext context, int index) {
