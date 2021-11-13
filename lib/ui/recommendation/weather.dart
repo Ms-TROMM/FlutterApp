@@ -12,16 +12,19 @@ class WeatherRecommendPage extends StatefulWidget {
 class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: _getRecommendText("홍길동"),
-        ),
-        Expanded(
-          child: _getRecommendList(),
-        )
-      ],
+    return SingleChildScrollView(
+      physics: const ScrollPhysics(),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: _getRecommendText("홍길동"),
+          ),
+          Container(
+            child: _getRecommendList(),
+          )
+        ],
+      ),
     );
   }
 
@@ -38,6 +41,8 @@ class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
     final List<int> colorCodes = <int>[200, 400, 600];
 
     return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.all(16),
       itemCount: entries.length,
       itemBuilder: (BuildContext context, int index) {

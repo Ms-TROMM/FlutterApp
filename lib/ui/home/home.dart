@@ -13,7 +13,9 @@ import 'moisture_box.dart';
 void main() {
   runApp(MaterialApp(
     title: 'MS. TROMM',
-    theme: ThemeData(fontFamily: 'Roboto'),
+    theme: ThemeData(
+      fontFamily: 'Roboto'
+    ),
     home: const HomePage(),
   ));
 }
@@ -94,15 +96,17 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: const Text('Ms. TROMM', style: TextStyle(fontFamily: 'Jalnan')),
       ),
-      body: Column(
-        children: [
-          _getWelcomeContainer("홍길동"),
-          Row(
-            children: [WeatherBox(), RecommendationBox()],
-          ),
-          StylerControlBox(),
-          MoistureBox()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _getWelcomeContainer("홍길동"),
+            Row(
+              children: [WeatherBox(), RecommendationBox()],
+            ),
+            StylerControlBox(),
+            MoistureBox()
+          ],
+        ),
       ),
     );
   }
