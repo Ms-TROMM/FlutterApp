@@ -74,5 +74,16 @@ flutter:
       fonts:
         - asset: fonts/jalnan.ttf
 
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
+
+    - family: DigitalMono
+      fonts:
+        - asset: fonts/digital-mono.ttf
+        - asset: fonts/digital-mono-italic.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

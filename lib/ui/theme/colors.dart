@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-const Map<String, Color> trommColor = {
-  "primary" : Color(0x002a7fff),
-  "onPrimary" : Colors.white,
-  "secondary" : Color(0x00707070),
-  "onSecondary" : Colors.white
-};
+
+class MyColor {
+  static Color secondary = const Color(0xcc6ba5fd);
+  static Color onSecondary = Colors.black;
+  static Color primary = const Color(0xffb1b1b1);
+  static Color onPrimary = Colors.white;
+  static Color stylerControllerBoxColor = const Color(0xf2f2f2);
+}
