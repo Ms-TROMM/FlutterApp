@@ -7,4 +7,7 @@ class MyColor {
   static Color primary = const Color(0xffb1b1b1);
   static Color onPrimary = Colors.white;
   static Color stylerControllerBoxColor = const Color(0xf2f2f2);
+
+  static Color secondaryDark1 = const Color(0xcc428dff);
+  static Color secondaryDark2 = const Color(0xcc1874ff);
 }

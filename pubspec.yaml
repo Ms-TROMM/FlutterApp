@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   page_view_indicators: ^2.0.0
   material_design_icons_flutter: ^3.2.3895
+  settings_ui: ^1.0.0
 
 dev_dependencies:
   flutter_test:
