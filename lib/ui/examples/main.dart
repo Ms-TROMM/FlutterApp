@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ms_tromm/api_service.dart';
+import 'package:ms_tromm/ui/examples/api_service.dart';
 import 'package:ms_tromm/models/album.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
