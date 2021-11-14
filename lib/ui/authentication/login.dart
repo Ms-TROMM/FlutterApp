@@ -92,12 +92,15 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           // Validate returns true if the form is valid, or false otherwise.
           if (_formKey.currentState!.validate()) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
           }
         },
         child: const Text('로그인',
             style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
         color: MyColor.secondaryDark2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -135,10 +138,7 @@ class _LoginPageState extends State<LoginPage> {
       autocorrect: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: '',
-        isDense: true 
-      ),
+          border: OutlineInputBorder(), hintText: '', isDense: true),
       validator: (value) {
         if (value!.isEmpty) {
           return "이메일을 입력해주세요";
@@ -173,11 +173,30 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _logo() {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(24, 0, 24, 24),
-      child: Text("Ms. TROMM",
-          style: TextStyle(
-              fontFamily: 'jalnan', fontWeight: FontWeight.bold, fontSize: 40)),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+      child: _logoColor()
+    );
+  }
+
+  _logoColor() {
+    return const Text.rich(
+      TextSpan(children: [
+        TextSpan(
+            text: 'Ms.',
+            style: TextStyle(
+                fontFamily: 'jalnan',
+                fontWeight: FontWeight.bold,
+                fontSize: 40,
+                color: Colors.grey)),
+        TextSpan(
+            text: 'TROMM',
+            style: TextStyle(
+                fontFamily: 'jalnan',
+                fontWeight: FontWeight.bold,
+                fontSize: 40,
+                color: Colors.blue)),
+      ]),
     );
   }
 }

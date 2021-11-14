@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ms_tromm/ui/authentication/utils.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
 
@@ -11,10 +12,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  static const NAME_FIELD = '이름';
-  static const EMAIL_FIELD = '이메일';
-  static const PASSWORD_FIELD = '비밀번호'; 
-  static const PASSWORD_CHECK_FIELD = '비밀번호 확인';
+  // static const NAME_FIELD = '이름';
+  // static const EMAIL_FIELD = '이메일';
+  // static const PASSWORD_FIELD = '비밀번호';
+  // static const PASSWORD_CHECK_FIELD = '비밀번호 확인';
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -31,10 +32,10 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _textInputWithTitle(NAME_FIELD),
-                _textInputWithTitle(EMAIL_FIELD),
-                _textInputWithTitle(PASSWORD_FIELD),
-                _textInputWithTitle(PASSWORD_CHECK_FIELD),
+                _textInputWithTitle(Utils.NAME_FIELD),
+                _textInputWithTitle(Utils.EMAIL_FIELD),
+                _textInputWithTitle(Utils.PASSWORD_FIELD),
+                _textInputWithTitle(Utils.PASSWORD_CHECK_FIELD),
                 _signUpButton()
               ],
             ),
@@ -47,13 +48,13 @@ class _SignUpPageState extends State<SignUpPage> {
   _textInputWithTitle(String title) {
     late TextFormField field;
     switch (title) {
-      case NAME_FIELD : field = _nameTextInputField(); 
+      case Utils.NAME_FIELD : field = _nameTextInputField();
       break; 
-      case EMAIL_FIELD: field = _emailTextInputField(); 
+      case Utils.EMAIL_FIELD: field = _emailTextInputField();
       break; 
-      case PASSWORD_FIELD : field = _passwordTextInputField(); 
+      case Utils.PASSWORD_FIELD : field = _passwordTextInputField();
       break; 
-      case PASSWORD_CHECK_FIELD : field = _passwordCheckTextInputField(); 
+      case Utils.PASSWORD_CHECK_FIELD : field = _passwordCheckTextInputField();
       break; 
     }
 
@@ -76,6 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextFormField(
         enableSuggestions: true,
         autocorrect: false,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           hintText: '이름',
@@ -96,6 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextFormField(
         enableSuggestions: true,
         autocorrect: false,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           hintText: '이메일',
@@ -117,6 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
         obscureText: true,
         enableSuggestions: false,
         autocorrect: false,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           hintText: '비밀번호',
@@ -136,6 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
       obscureText: true,
       enableSuggestions: false,
       autocorrect: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         hintText: '비밀번호 확인',
