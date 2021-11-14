@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           label: '추천',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.widgets),
+          icon: Icon(Icons.local_laundry_service),
           label: '스타일러',
         ),
         BottomNavigationBarItem(
