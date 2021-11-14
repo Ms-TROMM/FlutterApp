@@ -15,6 +15,7 @@ class _ControlRecommendPageState extends State<ControlRecommendPage> {
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16),
@@ -30,7 +31,7 @@ class _ControlRecommendPageState extends State<ControlRecommendPage> {
 
   _getRecommendText(String name) {
     return Text(
-      '$name님 안녕하세요!\n현재 집 안 온도는 22℃로 유지되고\n있습니다.\n스타일러 내에 정장이 있습니다.\n고급의류 코스를 추천합니다!',
+      '$name님 안녕하세요!\n현재 집 안 온도는 22℃로 유지되고 있습니다. 스타일러 내에 정장이 있습니다. 고급의류 코스를 추천합니다!',
       style: const TextStyle(
           fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold),
     );

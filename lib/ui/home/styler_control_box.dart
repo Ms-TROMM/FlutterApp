@@ -9,13 +9,17 @@ class StylerControlBox extends StatefulWidget {
 }
 
 class _StylerControlBoxState extends State<StylerControlBox> {
+  var roundCorner = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(15),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0), color: Colors.grey),
       width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.width * 0.5,
+      height: MediaQuery.of(context).size.width * 0.45,
       margin: const EdgeInsets.only(bottom: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -28,35 +32,40 @@ class _StylerControlBoxState extends State<StylerControlBox> {
                 color: Colors.white,
                 elevation: 0,
                 child: Text("스팀준비"),
+                shape: roundCorner,
               ),
               MaterialButton(
-                  onPressed: () {},
-                  color: Colors.white,
-                  elevation: 0,
-                  child: Text("리프레쉬")),
+                onPressed: () {},
+                color: Colors.white,
+                elevation: 0,
+                child: Text("리프레쉬"),
+                shape: roundCorner,
+              ),
               MaterialButton(
                 onPressed: () {},
                 color: Colors.white,
                 elevation: 0,
                 child: Text("건조"),
+                shape: roundCorner,
               ),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
+              const Text(
                 "88:88",
                 style: TextStyle(fontFamily: 'DigitalMono', fontSize: 84),
               ),
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
+                    padding: const EdgeInsets.only(right: 16.0),
                     child: MaterialButton(
                       onPressed: () {},
                       color: Colors.white,
                       elevation: 0,
+                      shape: roundCorner,
                       child: Row(
                         children: const [
                           Icon(Icons.add_circle, size: 16),
@@ -72,6 +81,7 @@ class _StylerControlBoxState extends State<StylerControlBox> {
                     onPressed: () {},
                     color: Colors.white,
                     elevation: 0,
+                    shape: roundCorner,
                     child: Row(
                       children: const [
                         Icon(Icons.remove_circle, size: 16),

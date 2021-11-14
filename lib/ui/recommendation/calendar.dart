@@ -15,6 +15,7 @@ class _CalendarRecommendPageState extends State<CalendarRecommendPage> {
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16),
@@ -30,7 +31,7 @@ class _CalendarRecommendPageState extends State<CalendarRecommendPage> {
 
   _getRecommendText(String name) {
     return Text(
-      '$name님 안녕하세요!\n오늘은 면접이 있는 날입니다.\n정장 세트가 스타일러 내에 있습니다.',
+      '$name님 안녕하세요!\n오늘은 면접이 있는 날입니다. 정장 세트가 스타일러 내에 있습니다.',
       style: const TextStyle(
           fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold),
     );

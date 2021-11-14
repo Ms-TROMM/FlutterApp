@@ -15,6 +15,7 @@ class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16),
@@ -30,7 +31,7 @@ class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
 
   _getRecommendText(String name) {
     return Text(
-      '$name님 안녕하세요!\n오늘 낮기온은 18℃, 밤기온은 5℃로\n일교차가 매우 큰 날씨입니다.\n오늘은 두꺼운 가디건이 어떨까요?',
+      '$name님 안녕하세요!\n오늘 낮기온은 18℃, 밤기온은 5℃로 일교차가 매우 큰 날씨입니다. 오늘은 두꺼운 가디건이 어떨까요?',
       style: const TextStyle(
           fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold),
     );
