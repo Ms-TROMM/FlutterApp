@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ms_tromm/ui/authentication/change_password.dart';
+import 'package:ms_tromm/ui/authentication/signup.dart';
+import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,7 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
@@ -37,23 +40,37 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 16.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
               child: Text.rich(
                 TextSpan(children: [
                   TextSpan(
                       text: '회원가입',
-                      style: TextStyle(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()),
+                          );
+                        },
+                      style: const TextStyle(
                           color: Colors.blueAccent,
                           decoration: TextDecoration.underline)),
-                  TextSpan(text: ' 혹은 '),
+                  const TextSpan(text: ' 혹은 '),
                   TextSpan(
                       text: '비밀번호 변경',
-                      style: TextStyle(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChangePasswordPage()));
+                        },
+                      style: const TextStyle(
                           color: Colors.blueAccent,
                           decoration: TextDecoration.underline)),
-                  TextSpan(text: '을 원하시나요?'),
-
+                  const TextSpan(text: '을 원하시나요?'),
                 ]),
               ),
             )
@@ -121,6 +138,8 @@ class _LoginPageState extends State<LoginPage> {
       validator: (value) {
         if (value!.isEmpty) {
           return "이메일을 입력해주세요";
+        } else if (!value.isValidEmail()) {
+          return "유효한 이메일 형식이 아닙니다";
         } else {
           return null;
         }
