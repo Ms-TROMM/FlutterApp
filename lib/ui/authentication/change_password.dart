@@ -13,7 +13,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('비밀번호 변경'),
+        title: const Text('비밀번호 변경'),
       ),
     );
   }

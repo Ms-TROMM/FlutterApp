@@ -17,13 +17,13 @@ class _RecommendationBoxState extends State<RecommendationBox> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0), color: MyColor.secondary),
-      width: MediaQuery.of(context).size.width * 0.425,
+      width: MediaQuery.of(context).size.width * 0.43,
       height: MediaQuery.of(context).size.width * 0.4,
-      margin: const EdgeInsets.fromLTRB(0, 10, 20, 20),
+      margin: const EdgeInsets.fromLTRB(0, 8, 16, 16),
       child: Container(
           alignment: Alignment.topRight,
           child: const Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
             child: Text(
               "오늘의\n추천",
               textAlign: TextAlign.end,

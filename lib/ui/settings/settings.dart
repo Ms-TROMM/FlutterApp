@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ms_tromm/ui/authentication/login.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -50,6 +51,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: '버전전보',
                 leading: Icon(Icons.info_outline),
                 onPressed: (BuildContext context) {},
+              ),
+              SettingsTile(
+                title: '로그아웃',
+                leading: Icon(Icons.exit_to_app),
+                onPressed: (BuildContext context) {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                },
               ),
             ],
           ),

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ms_tromm/ui/authentication/change_password.dart';
 import 'package:ms_tromm/ui/authentication/signup.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
+import 'package:ms_tromm/ui/home/home.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,14 +31,16 @@ class _LoginPageState extends State<LoginPage> {
             _logo(),
             Form(
               key: _formKey,
-              child: Column(
-                children: [
-                  _textInputWithTitle('이메일'),
-                  _textInputWithTitle('비밀번호'),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: _loginButton())
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _textInputWithTitle('이메일'),
+                    _textInputWithTitle('비밀번호'),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: _loginButton())
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -81,25 +84,24 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _loginButton() {
-    return MaterialButton(
-      height: 42,
-      minWidth: double.infinity,
-      onPressed: () {
-        // Validate returns true if the form is valid, or false otherwise.
-        if (_formKey.currentState!.validate()) {
-          // If the form is valid, display a snackbar. In the real world,
-          // you'd often call a server or save the information in a database.
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Logging In ...')),
-          );
-        }
-      },
-      child: const Text('로그인',
-          style: TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
-      color: MyColor.secondaryDark2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      child: MaterialButton(
+        height: 42,
+        minWidth: double.infinity,
+        onPressed: () {
+          // Validate returns true if the form is valid, or false otherwise.
+          if (_formKey.currentState!.validate()) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+          }
+        },
+        child: const Text('로그인',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+        color: MyColor.secondaryDark2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
       ),
     );
   }
@@ -113,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.only(bottom: 16.0, left: 8, right: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -131,9 +133,11 @@ class _LoginPageState extends State<LoginPage> {
     return TextFormField(
       enableSuggestions: true,
       autocorrect: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         hintText: '',
+        isDense: true 
       ),
       validator: (value) {
         if (value!.isEmpty) {
@@ -152,9 +156,11 @@ class _LoginPageState extends State<LoginPage> {
       obscureText: true,
       enableSuggestions: false,
       autocorrect: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         hintText: '',
+        isDense: true,
       ),
       validator: (value) {
         if (value!.isEmpty) {
@@ -168,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _logo() {
     return const Padding(
-      padding: EdgeInsets.all(24.0),
+      padding: EdgeInsets.fromLTRB(24, 0, 24, 24),
       child: Text("Ms. TROMM",
           style: TextStyle(
               fontFamily: 'jalnan', fontWeight: FontWeight.bold, fontSize: 40)),
