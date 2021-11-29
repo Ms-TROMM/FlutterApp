@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ms_tromm/ui/authentication/utils.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
@@ -11,12 +12,12 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+enum Gender { male, female }
+
 class _SignUpPageState extends State<SignUpPage> {
-  // static const NAME_FIELD = '이름';
-  // static const EMAIL_FIELD = '이메일';
-  // static const PASSWORD_FIELD = '비밀번호';
-  // static const PASSWORD_CHECK_FIELD = '비밀번호 확인';
+
   final _formKey = GlobalKey<FormState>();
+  Gender _gender = Gender.male;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,30 @@ class _SignUpPageState extends State<SignUpPage> {
                 _textInputWithTitle(Utils.EMAIL_FIELD),
                 _textInputWithTitle(Utils.PASSWORD_FIELD),
                 _textInputWithTitle(Utils.PASSWORD_CHECK_FIELD),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("성별"),
+                      Row(
+                        children: [
+                          Radio<Gender>(value: Gender.male, groupValue: _gender, onChanged: (value){
+                            setState(() {
+                              _gender = value!;
+                            });
+                          },), const Text("남자"),
+                          Radio<Gender>(value: Gender.female, groupValue: _gender, onChanged: (value){
+                            setState(() {
+                              _gender = value!;
+                            });
+                          }), const Text("여자")
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                _textInputWithTitle(Utils.BIRTH_DATE_FIELD),
                 _signUpButton()
               ],
             ),
@@ -48,14 +73,21 @@ class _SignUpPageState extends State<SignUpPage> {
   _textInputWithTitle(String title) {
     late TextFormField field;
     switch (title) {
-      case Utils.NAME_FIELD : field = _nameTextInputField();
-      break; 
-      case Utils.EMAIL_FIELD: field = _emailTextInputField();
-      break; 
-      case Utils.PASSWORD_FIELD : field = _passwordTextInputField();
-      break; 
-      case Utils.PASSWORD_CHECK_FIELD : field = _passwordCheckTextInputField();
-      break; 
+      case Utils.NAME_FIELD:
+        field = _nameTextInputField();
+        break;
+      case Utils.EMAIL_FIELD:
+        field = _emailTextInputField();
+        break;
+      case Utils.PASSWORD_FIELD:
+        field = _passwordTextInputField();
+        break;
+      case Utils.PASSWORD_CHECK_FIELD:
+        field = _passwordCheckTextInputField();
+        break;
+      case Utils.BIRTH_DATE_FIELD:
+        field = _birthDateCheckTextInputField();
+        break;
     }
 
     return Padding(
@@ -79,10 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
         autocorrect: false,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: '이름',
-          isDense: true
-        ),
+            border: OutlineInputBorder(), hintText: '이름', isDense: true),
         validator: (value) {
           if (value!.isEmpty) {
             return "이름을 입력해주세요";
@@ -100,10 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
         autocorrect: false,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: '이메일',
-          isDense: true
-        ),
+            border: OutlineInputBorder(), hintText: '이메일', isDense: true),
         validator: (value) {
           if (value!.isEmpty) {
             return "이메일을 입력해주세요";
@@ -142,15 +168,38 @@ class _SignUpPageState extends State<SignUpPage> {
       autocorrect: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: '비밀번호 확인',
-        isDense: true
-      ),
+          border: OutlineInputBorder(), hintText: '비밀번호 확인', isDense: true),
       validator: (value) {
         if (value!.isEmpty) {
           return "비밀번호를 다시 한 번 입력해주세요";
         } else {
           return null;
+        }
+      },
+    );
+  }
+
+  _birthDateCheckTextInputField() {
+    return TextFormField(
+      enableSuggestions: false,
+      autocorrect: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: const InputDecoration(
+          border: OutlineInputBorder(), hintText: 'ex. 1995', isDense: true),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "출생년도를 입력해주세요";
+        } else if (value.length != 4) {
+          return "출생년도 자릿수가 잘못되었습니다.";
+        } else {
+          return null;
+        }
+      },
+      onChanged: (value){
+        if (value.isNotEmpty) {
+          setState(() {
+            // TODO Do something
+          });
         }
       },
     );
@@ -170,11 +219,15 @@ class _SignUpPageState extends State<SignUpPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Signing Up ...')),
             );
+
+            // TODO navigate
           }
         },
         child: const Text('회원가입',
             style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
         color: MyColor.secondaryDark2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -183,5 +236,3 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-
-
