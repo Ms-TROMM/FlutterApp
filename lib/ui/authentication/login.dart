@@ -7,6 +7,7 @@ import 'package:ms_tromm/ui/authentication/signup.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/home/home.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
+import 'package:ms_tromm/ui/widgets/logo.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _logo(),
+            const Logo(edgeInsets: EdgeInsets.fromLTRB(24, 0, 24, 24)),
             Form(
               key: _formKey,
               child: SingleChildScrollView(
@@ -165,31 +166,31 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _logo() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-      child: _logoColor()
-    );
-  }
-
-  _logoColor() {
-    return const Text.rich(
-      TextSpan(children: [
-        TextSpan(
-            text: 'Ms.',
-            style: TextStyle(
-                fontFamily: 'jalnan',
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-                color: Colors.grey)),
-        TextSpan(
-            text: 'TROMM',
-            style: TextStyle(
-                fontFamily: 'jalnan',
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-                color: Colors.blue)),
-      ]),
-    );
-  }
+  // _logo() {
+  //   return Padding(
+  //     padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+  //     child: _logoColor()
+  //   );
+  // }
+  //
+  // _logoColor() {
+  //   return const Text.rich(
+  //     TextSpan(children: [
+  //       TextSpan(
+  //           text: 'Ms.',
+  //           style: TextStyle(
+  //               fontFamily: 'jalnan',
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 40,
+  //               color: Colors.grey)),
+  //       TextSpan(
+  //           text: 'TROMM',
+  //           style: TextStyle(
+  //               fontFamily: 'jalnan',
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 40,
+  //               color: Colors.blue)),
+  //     ]),
+  //   );
+  // }
 }
