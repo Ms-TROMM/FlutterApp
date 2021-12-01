@@ -7,6 +7,7 @@ import 'package:ms_tromm/ui/authentication/signup.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/home/home.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
+import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -85,27 +86,19 @@ class _LoginPageState extends State<LoginPage> {
 
   _loginButton() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-      child: MaterialButton(
-        height: 42,
-        minWidth: double.infinity,
+      padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+      child: TrommButton(
         onPressed: () {
           // Validate returns true if the form is valid, or false otherwise.
           if (_formKey.currentState!.validate()) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+            // FIXME
           }
+          // just navigate for now
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => const HomePage()));
         },
-        child: const Text('로그인',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white)),
-        color: MyColor.secondaryDark2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
+        text: '로그인'
+      )
     );
   }
 

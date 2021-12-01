@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ms_tromm/ui/authentication/signup_done.dart';
 import 'package:ms_tromm/ui/authentication/utils.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
+import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -15,7 +17,6 @@ class SignUpPage extends StatefulWidget {
 enum Gender { male, female }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   final _formKey = GlobalKey<FormState>();
   Gender _gender = Gender.male;
 
@@ -45,16 +46,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       const Text("성별"),
                       Row(
                         children: [
-                          Radio<Gender>(value: Gender.male, groupValue: _gender, onChanged: (value){
-                            setState(() {
-                              _gender = value!;
-                            });
-                          },), const Text("남자"),
-                          Radio<Gender>(value: Gender.female, groupValue: _gender, onChanged: (value){
-                            setState(() {
-                              _gender = value!;
-                            });
-                          }), const Text("여자")
+                          Radio<Gender>(
+                            value: Gender.male,
+                            groupValue: _gender,
+                            onChanged: (value) {
+                              setState(() {
+                                _gender = value!;
+                              });
+                            },
+                          ),
+                          const Text("남자"),
+                          Radio<Gender>(
+                              value: Gender.female,
+                              groupValue: _gender,
+                              onChanged: (value) {
+                                setState(() {
+                                  _gender = value!;
+                                });
+                              }),
+                          const Text("여자")
                         ],
                       )
                     ],
@@ -195,7 +205,7 @@ class _SignUpPageState extends State<SignUpPage> {
           return null;
         }
       },
-      onChanged: (value){
+      onChanged: (value) {
         if (value.isNotEmpty) {
           setState(() {
             // TODO Do something
@@ -206,11 +216,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   _signUpButton() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-      child: MaterialButton(
-        height: 42,
-        minWidth: double.infinity,
+    return TrommButton(
         onPressed: () {
           // Validate returns true if the form is valid, or false otherwise.
           if (_formKey.currentState!.validate()) {
@@ -219,20 +225,14 @@ class _SignUpPageState extends State<SignUpPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Signing Up ...')),
             );
-
-            // TODO navigate
+            // FIXME
           }
+          // just navigate for now
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SignUpDoneScreen()));
         },
-        child: const Text('회원가입',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white)),
-        color: MyColor.secondaryDark2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
-    );
+        text: '회원가입');
   }
 }
