@@ -39,6 +39,7 @@ class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
 
   _getRecommendList() {
     final List<String> entries = <String>['두꺼운 가디건', '활동성 좋은 긴바지', '민트향'];
+    final List<String> imagePaths = <String>['top.png', 'bottom.png', 'mint.png'];
     final List<int> colorCodes = <int>[200, 400, 600];
 
     return ListView.separated(
@@ -56,7 +57,7 @@ class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // TODO : Add Image for recommendation
+                  Padding(padding: const EdgeInsets.all(8), child: Image.asset('assets/images/${imagePaths[index]}')),
                   Text(entries[index],
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,

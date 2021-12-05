@@ -17,20 +17,16 @@ class _RecommendationPageState extends State<RecommendationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             bottom: const TabBar(
               tabs: [
                 Tab(
                   icon: Icon(Icons.brightness_5),
-                  text: '날씨',
+                  text: '오늘의 추천',
                 ),
-                Tab(
-                  icon: Icon(Icons.date_range),
-                  text: '일정',
-                ),
-                Tab(icon: Icon(Icons.widgets), text: '제어'),
+                Tab(icon: Icon(Icons.widgets), text: '제어 추천'),
               ],
             ),
             title: const Text('추천'),
@@ -38,7 +34,6 @@ class _RecommendationPageState extends State<RecommendationPage> {
           body: const TabBarView(
             children: [
               WeatherRecommendPage(),
-              CalendarRecommendPage(),
               ControlRecommendPage(),
             ],
           ),

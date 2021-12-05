@@ -38,8 +38,9 @@ class _ControlRecommendPageState extends State<ControlRecommendPage> {
   }
 
   _getRecommendList() {
-    final List<String> entries = <String>['', '', ''];
+    final List<String> entries = <String>['고급의류\n코스 실행', '섬세건조\n코스 실행', '스팀살균\n코스 실행'];
     final List<int> colorCodes = <int>[200, 400, 600];
+    final List<String> imagePaths = <String>['top.png', 'bottom.png', 'mint.png'];
 
     return ListView.separated(
       shrinkWrap: true,
@@ -56,7 +57,7 @@ class _ControlRecommendPageState extends State<ControlRecommendPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // TODO : Add Image for recommendation
+                  Padding(padding: const EdgeInsets.all(8), child: Image.asset('assets/images/${imagePaths[index]}')),
                   Text(entries[index],
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
