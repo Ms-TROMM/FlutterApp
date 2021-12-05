@@ -28,7 +28,7 @@ class _StylerControlBoxState extends State<StylerControlBox> {
     styler = Styler();
     smartMirror = SmartMirror();
 
-    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       setState(() {
         styler.setConnectionStateRandom();
         smartMirror.setConnectionStateRandom();
@@ -49,11 +49,13 @@ class _StylerControlBoxState extends State<StylerControlBox> {
           borderRadius: BorderRadius.circular(25.0), color: Colors.black12),
       height: MediaQuery.of(context).size.width * 0.6,
       margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -88,66 +90,91 @@ class _StylerControlBoxState extends State<StylerControlBox> {
                 onPressed: () {},
                 color: Colors.white,
                 elevation: 0,
-                child: Text("스팀준비"),
+                child: const Text("스팀준비"),
                 shape: roundCorner,
               ),
               MaterialButton(
                 onPressed: () {},
                 color: Colors.white,
                 elevation: 0,
-                child: Text("리프레쉬"),
+                child: const Text("리프레쉬"),
                 shape: roundCorner,
               ),
               MaterialButton(
                 onPressed: () {},
                 color: Colors.white,
                 elevation: 0,
-                child: Text("건조"),
+                child: const Text("건조"),
                 shape: roundCorner,
               ),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('작동중'),
+              const Text('작동중'),
               const Text(
                 "88:88",
-                style: TextStyle(fontFamily: 'DigitalMono', fontSize: 84),
+                style: TextStyle(fontFamily: 'DigitalMono', fontSize: 64),
               ),
               Row(
                 children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Image.asset(
+                          'assets/images/pause.png',
+                          width: 32,
+                        )),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: MaterialButton(
-                      onPressed: () {},
-                      color: Colors.white,
-                      elevation: 0,
-                      shape: roundCorner,
+                    padding: const EdgeInsets.all(4),
+                    child: InkWell(
+                      onTap: () {},
                       child: Row(
-                        children: const [
-                          Icon(Icons.add_circle, size: 16),
-                          Padding(
-                            padding: EdgeInsets.only(left: 4.0),
-                            child: Text("보충"),
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              children: [
+                                Icon(Icons.add_circle, size: 16),
+                                Text('버림')
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  MaterialButton(
-                    onPressed: () {},
-                    color: Colors.white,
-                    elevation: 0,
-                    shape: roundCorner,
-                    child: Row(
-                      children: const [
-                        Icon(Icons.remove_circle, size: 16),
-                        Padding(
-                          padding: EdgeInsets.only(left: 4.0),
-                          child: Text("버림"),
-                        ),
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              children: [
+                                Icon(Icons.remove_circle, size: 16),
+                                Text('버림')
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
