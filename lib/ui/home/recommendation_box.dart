@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
 import 'package:ms_tromm/ui/theme/dimens.dart';
 
@@ -17,19 +18,29 @@ class _RecommendationBoxState extends State<RecommendationBox> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0), color: MyColor.secondary),
-      width: MediaQuery.of(context).size.width * 0.43,
       height: MediaQuery.of(context).size.width * 0.4,
-      margin: const EdgeInsets.fromLTRB(0, 8, 16, 16),
+      margin: const EdgeInsets.fromLTRB(0, 8, 0, 16),
       child: Container(
           alignment: Alignment.topRight,
-          child: const Padding(
-            padding: EdgeInsets.all(20),
-            child: Text(
-              "오늘의\n추천",
-              textAlign: TextAlign.end,
-              style: TextStyle(
-                  fontSize: MyDimens.FontSize_Medium,
-                  fontWeight: FontWeight.w900),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Stack(
+              children: [
+                Image.asset('assets/images/survey_done.png',
+                    height: double.infinity,
+                    width: double.infinity,
+                    color: Colors.white60,
+                    fit: BoxFit.cover, colorBlendMode: BlendMode.modulate,),
+                Container(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    "오늘의\n추천",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                        color: Colors.black, fontSize: MyDimens.FontSize_Large, fontWeight: FontWeight.w900),
+                  ),
+                ),
+              ],
             ),
           )),
     );

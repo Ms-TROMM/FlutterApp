@@ -17,9 +17,8 @@ class _WeatherBoxState extends State<WeatherBox> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0), color: MyColor.secondary),
-      width: MediaQuery.of(context).size.width * 0.43,
       height: MediaQuery.of(context).size.width * 0.4,
-      margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+      margin: const EdgeInsets.fromLTRB(0, 8, 16, 16),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(children: [

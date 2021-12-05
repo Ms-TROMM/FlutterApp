@@ -18,9 +18,8 @@ class _StylerControlBoxState extends State<StylerControlBox> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0), color: Colors.grey),
-      width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.width * 0.45,
-      margin: const EdgeInsets.only(bottom: 20.0),
+      margin: const EdgeInsets.only(bottom: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

@@ -19,7 +19,6 @@ class _MoistureBoxState extends State<MoistureBox> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0), color: MyColor.secondary),
-      width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.width * 0.3,
       margin: EdgeInsets.only(bottom: 16),
       child: Row(
