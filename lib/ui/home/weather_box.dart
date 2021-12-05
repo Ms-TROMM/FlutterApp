@@ -31,11 +31,11 @@ class _WeatherBoxState extends State<WeatherBox> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("금요일",
-                          style: TextStyle(fontSize: MyDimens.FontSize_Medium)),
-                      Text("5",
-                          style: TextStyle(fontSize: MyDimens.FontSize_Large)),
+                    children: [
+                      Text(getWeekDay(),
+                          style: const TextStyle(fontSize: MyDimens.FontSize_Medium)),
+                      Text(getDay(),
+                          style: const TextStyle(fontSize: MyDimens.FontSize_Large)),
                     ],
                   ),
                 ),
@@ -69,5 +69,30 @@ class _WeatherBoxState extends State<WeatherBox> {
         ]),
       ),
     );
+  }
+
+  String getDay() {
+    return DateTime.now().day.toString();
+  }
+
+  String getWeekDay(){
+    String weekDay = '월요일';
+    switch(DateTime.now().weekday) {
+      case 1: weekDay = '월요일';
+      break;
+      case 2: weekDay = '화요일';
+      break;
+      case 3: weekDay = '수요일';
+      break;
+      case 4: weekDay = '목요일';
+      break;
+      case 5: weekDay = '금요일';
+      break;
+      case 6: weekDay = '토요일';
+      break;
+      case 7: weekDay = '일요일';
+      break;
+    }
+    return weekDay;
   }
 }

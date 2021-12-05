@@ -33,11 +33,11 @@ class _RecommendationBoxState extends State<RecommendationBox> {
                     fit: BoxFit.cover, colorBlendMode: BlendMode.modulate,),
                 Container(
                   alignment: Alignment.topRight,
-                  child: Text(
+                  child: const Text(
                     "오늘의\n추천",
                     textAlign: TextAlign.end,
                     style: TextStyle(
-                        color: Colors.black, fontSize: MyDimens.FontSize_Large, fontWeight: FontWeight.w900),
+                        color: Colors.black, fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.w900),
                   ),
                 ),
               ],

@@ -6,8 +6,8 @@ import 'package:ms_tromm/ui/home/weather_box.dart';
 import 'package:ms_tromm/ui/recommendation/recommendation_page.dart';
 import 'package:ms_tromm/ui/settings/settings.dart';
 import 'package:ms_tromm/ui/styler/styler.dart';
-import 'package:ms_tromm/ui/theme/colors.dart';
 
+import 'alert_page.dart';
 import 'moisture_box.dart';
 
 void main() {
@@ -93,12 +93,29 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ms. TROMM', style: TextStyle(fontFamily: 'Jalnan')),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AlertPage()));
+                },
+                child: Image.asset(
+                  'assets/images/icon_feather_bell.png',
+                  width: 24,
+                  color: Colors.white,
+                )),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            _getWelcomeContainer("홍길동"),
+            _getWelcomeContainer("김엘지"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [
@@ -118,7 +135,7 @@ class _MainPageState extends State<MainPage> {
     return Container(
       alignment: Alignment.topLeft,
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         child: Text('$name님 안녕하세요!',
             style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 30)),
       ),
