@@ -11,7 +11,6 @@ class SurveyStepThree extends StatefulWidget {
 }
 
 class _SurveyStepThreeState extends State<SurveyStepThree> {
-
   Map<String, String> imagePath = {
     'scent_musk.png': '머스크',
     'scent_aromatic.png': '아로마틱',
@@ -21,7 +20,6 @@ class _SurveyStepThreeState extends State<SurveyStepThree> {
     'scent_powdery.png': '파우더리'
   };
 
-
   List<String> explain = [
     '중성적인 느낌',
     '허브향',
@@ -30,6 +28,8 @@ class _SurveyStepThreeState extends State<SurveyStepThree> {
     '어우러진 꽃 향기',
     '벨벳처럼 부드러운'
   ];
+
+  List<bool> selectedItems = [false, false, false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +52,40 @@ class _SurveyStepThreeState extends State<SurveyStepThree> {
               crossAxisCount: 3,
               children: List.generate(6, (index) {
                 return Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                          'assets/images/${imagePath.entries.elementAt(index).key}', width: 75,),
-                      Text(imagePath.entries.elementAt(index).value),
-                      Text(explain[index], style: const TextStyle(
-                        fontSize: 12, color: Colors.blue
-                      ),)
-                    ],
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedItems[index] = !selectedItems[index];
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: selectedItems[index]
+                                      ? Colors.blue
+                                      : Colors.black12),
+                              shape: BoxShape.circle),
+                          child: Image.asset(
+                            'assets/images/${imagePath.entries.elementAt(index).key}',
+                            width: 75,
+                          ),
+                        ),
+                        Text(imagePath.entries.elementAt(index).value, style: TextStyle(
+                            color: selectedItems[index]
+                                ? Colors.blueAccent
+                                : Colors.black)),
+                        Text(
+                          explain[index],
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: selectedItems[index]
+                                  ? Colors.blue
+                                  : Colors.black54),
+                        )
+                      ],
+                    ),
                   ),
                 );
               }),

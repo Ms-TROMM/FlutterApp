@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/survey/survey_step_3.dart';
@@ -24,6 +23,18 @@ class _SurveyStepTwoPageState extends State<SurveyStepTwoPage> {
     const Color(0xfffbea2a): '옐로우'
   };
 
+  List<bool> selectedItems = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,16 +56,25 @@ class _SurveyStepTwoPageState extends State<SurveyStepTwoPage> {
               crossAxisCount: 3,
               children: List.generate(9, (index) {
                 return Center(
-                    child: Column(
-                  children: [
-                    Container(
+                    child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      selectedItems[index] = !selectedItems[index];
+                    });
+                  },
+                  child: Column(
+                    children: [
+                      Container(
                         margin: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black12, width: 1),
+                            border: Border.all(color: selectedItems[index] ? Colors.blue : Colors.black12, width: 1),
                             color: imagePath.entries.elementAt(index).key,
-                            shape: BoxShape.circle), height: 64,),
-                    Text(imagePath.entries.elementAt(index).value)
-                  ],
+                            shape: BoxShape.circle),
+                        height: 64,
+                      ),
+                      Text(imagePath.entries.elementAt(index).value, style: TextStyle(color: selectedItems[index] ? Colors.blue : Colors.black),)
+                    ],
+                  ),
                 ));
               }),
               shrinkWrap: true,

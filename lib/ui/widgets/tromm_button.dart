@@ -5,7 +5,9 @@ import 'package:ms_tromm/ui/theme/colors.dart';
 class TrommButton extends StatelessWidget {
   final GestureTapCallback onPressed;
   final String text;
-  const TrommButton({Key? key, required this.onPressed, required this.text}) : super(key: key);
+
+  const TrommButton({Key? key, required this.onPressed, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,5 +29,4 @@ class TrommButton extends StatelessWidget {
       ),
     );
   }
-
 }
