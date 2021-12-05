@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ms_tromm/ui/survey/survey_done.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
 class SurveyStepThree extends StatefulWidget {
@@ -74,6 +75,10 @@ class _SurveyStepThreeState extends State<SurveyStepThree> {
             TrommButton(
               onPressed: () {
                 // move onto next screen
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SurveyDonePage()));
               },
               text: '다음',
             )
