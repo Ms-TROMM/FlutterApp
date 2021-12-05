@@ -6,7 +6,6 @@ import 'package:ms_tromm/ui/authentication/change_password.dart';
 import 'package:ms_tromm/ui/authentication/signup.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/home/home.dart';
-import 'package:ms_tromm/ui/theme/colors.dart';
 import 'package:ms_tromm/ui/widgets/logo.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 

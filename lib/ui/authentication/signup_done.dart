@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ms_tromm/ui/authentication/login.dart';
+import 'package:ms_tromm/ui/survey/survey_main.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
 class SignUpDoneScreen extends StatefulWidget {
@@ -25,14 +25,15 @@ class _SignUpDoneScreenState extends State<SignUpDoneScreen> {
           const Text(
             '회원가입을 축하합니다!\n로그인 후 Ms.TROMM의 서비스를 이용해보세요.',
             textAlign: TextAlign.center,
-            // style: Theme.of(context).textTheme.subtitle2, FIXME
+            style: TextStyle(fontSize: 16),
           ),
           Padding(
             padding: const EdgeInsets.all(8),
             child: TrommButton(onPressed: (){
               // just navigate for now
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => const LoginPage()));
+              Navigator.push(
+                // TODO check if it is first login
+                  context, MaterialPageRoute(builder: (context) => const SurveyMain()));
             }, text: '로그인'),
           )
         ],

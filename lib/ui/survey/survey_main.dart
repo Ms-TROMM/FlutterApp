@@ -4,14 +4,14 @@ import 'package:ms_tromm/ui/survey/survey_step_1.dart';
 import 'package:ms_tromm/ui/widgets/logo.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
-class SurveyStepZero extends StatefulWidget {
-  const SurveyStepZero({Key? key}) : super(key: key);
+class SurveyMain extends StatefulWidget {
+  const SurveyMain({Key? key}) : super(key: key);
 
   @override
-  _SurveyStepZeroState createState() => _SurveyStepZeroState();
+  _SurveyMainState createState() => _SurveyMainState();
 }
 
-class _SurveyStepZeroState extends State<SurveyStepZero> {
+class _SurveyMainState extends State<SurveyMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
