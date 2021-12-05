@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/survey/survey_step_2.dart';
+import 'package:ms_tromm/ui/widgets/spacer.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
 class SurveyStepFirst extends StatefulWidget {
@@ -29,71 +30,76 @@ class _SurveyStepFirstState extends State<SurveyStepFirst> {
         title: const Text('설문 (1/3)'),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              '평소에 자주 입는 스타일은 어떻게 되시나요? 3개 까지 골라주세요!',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            GridView.count(
-              crossAxisCount: 3,
-              children: List.generate(6, (index) {
-                return Center(
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        selectedItems[index] = !selectedItems[index];
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: selectedItems[index]
-                                      ? Colors.blue
-                                      : Colors.black12),
-                              shape: BoxShape.circle),
-                          child: Image.asset(
-                            'assets/images/${imagePath.entries.elementAt(index).key}',
-                            width: 75,
-                          ),
-                        ),
-                        Text(
-                          imagePath.entries.elementAt(index).value,
-                          style: TextStyle(
-                              color: selectedItems[index]
-                                  ? Colors.blue
-                                  : Colors.black),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              }),
-              shrinkWrap: true,
-            ),
-            const Center(
-              child: Text(
-                '여기에 없어요',
-                style: TextStyle(color: Colors.black38, fontSize: 20),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                '평소에 자주 입는 스타일은 어떻게 되시나요? 3개 까지 골라주세요!',
+                style: Theme.of(context).textTheme.headline5,
               ),
-            ),
-            TrommButton(
-              onPressed: () {
-                // move onto next screen
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SurveyStepTwoPage()));
-              },
-              text: '다음',
-            )
-          ],
+              spacer,
+              GridView.count(
+                crossAxisCount: 3,
+                children: List.generate(6, (index) {
+                  return Center(
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedItems[index] = !selectedItems[index];
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: selectedItems[index]
+                                        ? Colors.blue
+                                        : Colors.black12),
+                                shape: BoxShape.circle),
+                            child: Image.asset(
+                              'assets/images/${imagePath.entries.elementAt(index).key}',
+                              width: 75,
+                            ),
+                          ),
+                          Text(
+                            imagePath.entries.elementAt(index).value,
+                            style: TextStyle(
+                                color: selectedItems[index]
+                                    ? Colors.blue
+                                    : Colors.black),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+                shrinkWrap: true,
+              ),
+              spacer,
+              const Center(
+                child: Text(
+                  '여기에 없어요',
+                  style: TextStyle(color: Colors.black38, fontSize: 20),
+                ),
+              ),
+              spacer,
+              TrommButton(
+                onPressed: () {
+                  // move onto next screen
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SurveyStepTwoPage()));
+                },
+                text: '다음',
+              )
+            ],
+          ),
         ),
       ),
     );
