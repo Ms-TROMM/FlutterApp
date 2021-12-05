@@ -11,7 +11,7 @@ void main() {
     initialRoute: '/',
     routes: {
       // FIXME fix route later
-      '/': (context) => const LoginPage(),
+      '/': (context) => const TutorialPage(),
       '/survey': (context) => const SurveyMain(),
       '/home': (context) => const HomePage(),
       '/tutorial': (context) => const TutorialPage()
