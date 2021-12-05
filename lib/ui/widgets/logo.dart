@@ -20,14 +20,14 @@ class Logo extends StatelessWidget {
               style: TextStyle(
                   fontFamily: 'jalnan',
                   fontWeight: FontWeight.bold,
-                  fontSize: 40,
+                  fontSize: 32,
                   color: Colors.grey)),
           TextSpan(
               text: 'TROMM',
               style: TextStyle(
                   fontFamily: 'jalnan',
                   fontWeight: FontWeight.bold,
-                  fontSize: 40,
+                  fontSize: 32,
                   color: Colors.blue)),
         ]),
       ),

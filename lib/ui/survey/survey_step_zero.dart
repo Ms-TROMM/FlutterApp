@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ms_tromm/ui/survey/survey_step_first.dart';
+import 'package:ms_tromm/ui/survey/survey_step_1.dart';
 import 'package:ms_tromm/ui/widgets/logo.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
@@ -39,7 +39,10 @@ class _SurveyStepZeroState extends State<SurveyStepZero> {
             TrommButton(
               onPressed: () {
                 // move onto next screen
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const SurveyStepFirst()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SurveyStepFirst()));
               },
               text: '설문 진행하기',
             )
