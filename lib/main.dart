@@ -16,8 +16,7 @@ void main() {
       '/home': (context) => const HomePage(),
       '/tutorial': (context) => const TutorialPage()
     },
-    theme: ThemeData(
-        fontFamily: 'Roboto'
-    ),
+    theme:
+        ThemeData(fontFamily: 'Roboto', scaffoldBackgroundColor: Colors.white),
   ));
 }

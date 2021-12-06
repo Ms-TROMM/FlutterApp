@@ -20,6 +20,7 @@ class _SettingsPageState extends State<SettingsPage> {
         title: const Text('설정'),
       ),
       body: SettingsList(
+        backgroundColor: Colors.white,
         sections: [
           SettingsSection(
             titlePadding: EdgeInsets.all(20),
