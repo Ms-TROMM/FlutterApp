@@ -41,7 +41,7 @@ class _SurveyStepFirstState extends State<SurveyStepFirst> {
                 '평소에 자주 입는 스타일은 어떻게 되시나요? 3개 까지 골라주세요!',
                 style: Theme.of(context).textTheme.headline5,
               ),
-              spacer,
+              spacer_2x,
               GridView.count(
                 crossAxisCount: 3,
                 children: List.generate(6, (index) {

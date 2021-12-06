@@ -29,6 +29,7 @@ class _SurveyDonePageState extends State<SurveyDonePage> {
                 const Text('김엘지님',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28))
               ]),
+              spacer,
               Text(
                 '더 정확한 추천을 하는 \nMs. TROMM이 되겠습니다!\n감사합니다 :)',
                 style: Theme.of(context).textTheme.headline5,

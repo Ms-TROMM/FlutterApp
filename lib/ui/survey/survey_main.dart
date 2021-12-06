@@ -29,6 +29,7 @@ class _SurveyMainState extends State<SurveyMain> {
                 const Text('김엘지님 안녕하세요 :)',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28))
               ]),
+              spacer,
               Text(
                 '엘지님과 진행해드리기 전에 \n엘지님의 의견을 듣고\n더 나은 추천을 해드릴게요!',
                 style: Theme.of(context).textTheme.headline5,

@@ -50,7 +50,7 @@ class _SurveyStepThreeState extends State<SurveyStepThree> {
                 '좋아하는 향은 어떻게 되시나요? 3개까지 골라주세요!',
                 style: Theme.of(context).textTheme.headline5,
               ),
-              spacer,
+              spacer_2x,
               GridView.count(
                 crossAxisCount: 3,
                 children: List.generate(6, (index) {
