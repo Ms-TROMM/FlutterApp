@@ -37,8 +37,8 @@ class _TutorialPageState extends State<TutorialPage> {
                     buttonText: '다음',
                     onPressed: () {
                       controller.animateToPage(1,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.bounceIn);
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.linear);
                     },
                   ),
                 ),
@@ -49,8 +49,8 @@ class _TutorialPageState extends State<TutorialPage> {
                     buttonText: '다음',
                     onPressed: () {
                       controller.animateToPage(2,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.bounceIn);
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.linear);
                     },
                   ),
                 ),

@@ -145,7 +145,7 @@ class _StylerControlBoxState extends State<StylerControlBox> {
                             child: Row(
                               children: [
                                 Icon(Icons.add_circle, size: 16),
-                                Text('버림')
+                                Text('보충')
                               ],
                             ),
                           ),

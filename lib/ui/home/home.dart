@@ -6,6 +6,7 @@ import 'package:ms_tromm/ui/home/weather_box.dart';
 import 'package:ms_tromm/ui/recommendation/recommendation_page.dart';
 import 'package:ms_tromm/ui/settings/settings.dart';
 import 'package:ms_tromm/ui/styler/styler.dart';
+import 'package:ms_tromm/ui/styler/styler2.dart';
 
 import 'alert_page.dart';
 import 'moisture_box.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = <Widget>[
     MainPage(),
     RecommendationPage(),
-    StylerPage(),
+    Styler2(),
     SettingsPage(),
   ];
 
