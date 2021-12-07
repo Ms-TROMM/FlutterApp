@@ -41,11 +41,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyClosetPage()),
+                MaterialPageRoute(builder: (context) => const MyClosetPage()),
               );
             },
-            child: const Icon(Icons.account_circle),
-            backgroundColor: Colors.redAccent,
+            child: Image.asset("assets/images/t_shirt.png", width: 24,),
+            backgroundColor: Colors.blue,
           ),
         ),
       ),

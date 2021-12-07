@@ -10,8 +10,8 @@ void main() {
     title: 'MS. TROMM',
     initialRoute: '/',
     routes: {
-      // FIXME fix route later
       '/': (context) => const TutorialPage(),
+      '/login': (context) => const LoginPage(),
       '/survey': (context) => const SurveyMain(),
       '/home': (context) => const HomePage(),
       '/tutorial': (context) => const TutorialPage()

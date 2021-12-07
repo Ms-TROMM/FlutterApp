@@ -43,10 +43,8 @@ class _SurveyDonePageState extends State<SurveyDonePage> {
               spacer,
               TrommButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                  Navigator.pushAndRemoveUntil(
+                      context, MaterialPageRoute(builder: (context) => const HomePage()), (Route<dynamic> route) => false);
                 },
                 text: '홈으로 이동',
               )

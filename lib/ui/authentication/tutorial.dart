@@ -60,10 +60,8 @@ class _TutorialPageState extends State<TutorialPage> {
                     text: '우리 집 환경을\n더 스마트하게 조절하세요',
                     buttonText: '로그인',
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()));
+                      // User should not comeback to tutorial screen when clicking back button
+                      Navigator.pushReplacementNamed(context, '/login');
                     },
                   ),
                 )

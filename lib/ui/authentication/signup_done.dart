@@ -31,9 +31,8 @@ class _SignUpDoneScreenState extends State<SignUpDoneScreen> {
             padding: const EdgeInsets.all(8),
             child: TrommButton(onPressed: (){
               // just navigate for now
-              Navigator.push(
-                // TODO check if it is first login
-                  context, MaterialPageRoute(builder: (context) => const SurveyMain()));
+              Navigator.pushReplacementNamed(
+                  context, '/survey');
             }, text: '로그인'),
           )
         ],
