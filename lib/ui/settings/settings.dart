@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/authentication/login.dart';
+import 'package:ms_tromm/ui/settings/my_info_page.dart';
+import 'package:ms_tromm/ui/settings/personal_info_policy.dart';
+import 'package:ms_tromm/ui/settings/version_info_page.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -29,13 +32,19 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsTile(
                 title: '내 정보',
                 leading: Icon(Icons.account_circle),
-                onPressed: (BuildContext context) {},
+                onPressed: (BuildContext context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MyInfoPage()));
+                },
               ),
               SettingsTile.switchTile(
                 title: '푸시알림',
                 leading: Icon(Icons.alarm),
-                switchValue: true,
-                onToggle: (value) {},
+                switchValue: isSwitched,
+                onToggle: (value) {
+                  setState(() {
+                    isSwitched = !isSwitched;
+                  });
+                },
               ),
             ],
           ),
@@ -46,12 +55,16 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsTile(
                 title: '약관',
                 leading: Icon(Icons.format_list_numbered),
-                onPressed: (BuildContext context) {},
+                onPressed: (BuildContext context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PersonalPolicy()));
+                },
               ),
               SettingsTile(
                 title: '버전전보',
                 leading: Icon(Icons.info_outline),
-                onPressed: (BuildContext context) {},
+                onPressed: (BuildContext context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => VersionPage()));
+                },
               ),
               SettingsTile(
                 title: '로그아웃',

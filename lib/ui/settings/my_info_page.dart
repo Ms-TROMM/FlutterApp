@@ -6,16 +6,16 @@ import 'package:ms_tromm/ui/authentication/utils.dart';
 import 'package:ms_tromm/ui/authentication/validators.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class MyInfoPage extends StatefulWidget {
+  const MyInfoPage({Key? key}) : super(key: key);
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _MyInfoPageState createState() => _MyInfoPageState();
 }
 
 enum Gender { male, female }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _MyInfoPageState extends State<MyInfoPage> {
   final _formKey = GlobalKey<FormState>();
   Gender _gender = Gender.male;
 
@@ -23,7 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('회원가입'),
+        title: const Text('내 정보'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -116,6 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   _nameTextInputField() {
     return TextFormField(
+      initialValue: '김엘지',
         enableSuggestions: true,
         autocorrect: false,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -134,6 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   _emailTextInputField() {
     return TextFormField(
+      initialValue: 'kimlg@gmail.com',
         enableSuggestions: true,
         autocorrect: false,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -190,6 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   _birthDateCheckTextInputField() {
     return TextFormField(
+      initialValue: '1995',
       enableSuggestions: false,
       autocorrect: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -222,16 +225,10 @@ class _SignUpPageState extends State<SignUpPage> {
             // If the form is valid, display a snackbar. In the real world,
             // you'd often call a server or save the information in a database.
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Signing Up ...')),
+              const SnackBar(content: Text('내 정보를 변경하였습니다.')),
             );
-            // FIXME
           }
-          // just navigate for now
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const SignUpDoneScreen()));
         },
-        text: '회원가입');
+        text: '변경하기');
   }
 }
