@@ -1,34 +1,53 @@
 import 'package:flutter/material.dart';
 
-Future<void> _showMyDialog(
-  BuildContext context,
-  String title,
-  String content,
-  String buttonText,
-  VoidCallback? onPressed,
-) async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(content),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text(buttonText),
-            onPressed: () {
-              onPressed!();
-            },
-          ),
-        ],
-      );
-    },
+AlertDialog yesOrNoDialog(BuildContext context, String? title, String content,
+    VoidCallback onYes, VoidCallback onNo) {
+  return AlertDialog(
+    title: Text(title ?? ''),
+    content: Text(content),
+    actions: [
+      TextButton(
+          onPressed: () {
+            onYes();
+          },
+          child: const Text('확인')),
+      TextButton(
+          onPressed: () {
+            onNo();
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            '취소',
+            style: TextStyle(color: Colors.red),
+          )),
+    ],
   );
 }
+
+AlertDialog simpleDialog(
+    BuildContext context, String? title, String content, VoidCallback? onYes) {
+  return AlertDialog(
+    title: Text(title ?? ''),
+    content: Text(content),
+    actions: [
+      TextButton(
+          onPressed: () {
+            if (onYes != null) {
+              onYes();
+            }
+            Navigator.of(context).pop();
+          },
+          child: const Text('확인')),
+    ],
+  );
+}
+
+/**
+ *
+ showDialog(context: context, builder: (context) =>
+    yesOrNoDialog(context, "Title", "content", (){
+    // do nothing
+    }, () {
+    // close
+    }));
+ * */

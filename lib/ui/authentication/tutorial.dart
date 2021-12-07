@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/authentication/login.dart';
 import 'package:ms_tromm/ui/widgets/logo.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
+import 'package:ms_tromm/ui/widgets/alert_dialog.dart';
 
 class TutorialPage extends StatefulWidget {
   const TutorialPage({Key? key}) : super(key: key);
