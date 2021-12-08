@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/authentication/login.dart';
@@ -43,6 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onToggle: (value) {
                   setState(() {
                     isSwitched = !isSwitched;
+                    getPushPermission(isSwitched);
                   });
                 },
               ),
@@ -80,3 +82,26 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 }
+
+Future<void> getPushPermission(bool isSwitched) async {
+  if(!isSwitched) return;
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true
+  );
+  print('User granted permission: ${settings.authorizationStatus}');
+}
+
+// The authorizationStatus property can return a value which can be used to determine the users overall decision:
+//
+// authorized: The user granted permission.
+// denied: The user denied permission.
+// notDetermined: The user has not yet chosen whether to grant permission.
+// provisional: The user granted provisional permission (see Provisional Permission).

@@ -25,6 +25,9 @@ class _Styler2State extends State<Styler2> {
       border: Border.all(color: Colors.grey, width: 1),
       borderRadius: const BorderRadius.all(Radius.circular(5)));
 
+  bool isPowerOn = false;
+  bool isPlayOn = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
