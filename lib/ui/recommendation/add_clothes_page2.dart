@@ -11,84 +11,127 @@ class AddClothesPage2 extends StatefulWidget {
 }
 
 class _AddClothesPage2State extends State<AddClothesPage2> {
+  static const selection1 = <String>['상의', '하의'];
+  static const selection2 = <String>['후드티', '와이셔츠', '파카', '코트'];
+  static const selection3 = <String>['빨강색', '주황색', '노란색', '초록색'];
+  static const selection4 = <String>['울', '면'];
 
-  var selectedValue1 = 'A';
-  var selectedValue2 = 'B';
-  var selectedValue3 = 'C';
-  var selectedValue4 = 'D';
+  var selectedValue1 = selection1[0];
+  var selectedValue2 = selection2[0];
+  var selectedValue3 = selection3[0];
+  var selectedValue4 = selection4[0];
 
   @override
   Widget build(BuildContext context) {
+
+    TextStyle style = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('새 옷 등록하기 (2/2)'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text('카테고리'),
-            DropdownButton<String>(
-              value: selectedValue1,
-              items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedValue1 = value!;
-                });
-              },
-            ),
-            Text('하위카테고리'),
-            DropdownButton<String>(
-              value: selectedValue2,
-              items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedValue2 = value!;
-                });
-              },
-            ),
-            Text('색상'),
-            DropdownButton<String>(
-              value: selectedValue3,
-              items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedValue3 = value!;
-                });
-              },
-            ),
-            Text('재질'),
-            DropdownButton<String>(
-              value: selectedValue4,
-              items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedValue4 = value!;
-                });
-              },
-            )
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('옷 이름', style: style,),
+              spacer,
+              TextFormField(
+                enableSuggestions: false,
+                autocorrect: false,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), hintText: '이름을 입력해주세요! (최대 8글자)', isDense: true),
+                validator: (value) {
+                },
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    setState(() {
+// TODO Do something
+                    });
+                  }
+                },
+              ),
+              spacer_2x,
+              Text('카테고리', style: style,),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: selectedValue1,
+                items: selection1.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value,),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue1 = value!;
+                  });
+                },
+              ),
+              spacer_2x,
+              Text('하위카테고리', style: style,),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: selectedValue2,
+                items: selection2.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue2 = value!;
+                  });
+                },
+              ),
+              spacer_2x,
+              Text('색상', style: style,),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: selectedValue3,
+                items: selection3.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue3 = value!;
+                  });
+                },
+              ),
+              spacer_2x,
+              Text('재질', style: style,),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: selectedValue4,
+                items: selection4.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue4 = value!;
+                  });
+                },
+              ),
+              spacer_2x,
+              TrommButton(onPressed: (){
+                // TODO POST 요청 날리기
+              }, text: '등록하기')
+            ],
+          ),
         ),
       ),
     );
   }
 }
+

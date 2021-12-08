@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/widgets/spacer.dart';
@@ -23,15 +24,34 @@ class _MyClosetPageState extends State<MyClosetPage> {
         "this.createdAt", "this.styleredAt"),
   ];
 
+  late List<CameraDescription> cameras;
+  late CameraDescription firstCamera;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_){
+      _asyncMethod();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('내 옷장'),
           actions: [
-            IconButton(icon: Icon(Icons.add_a_photo), onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => AddClothesPage1()));
-            },)
+            IconButton(
+              icon: const Icon(Icons.add_a_photo),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddClothesPage1(
+                              camera: firstCamera,
+                            )));
+              },
+            )
           ],
         ),
         body: ListView.builder(
@@ -57,11 +77,15 @@ class _MyClosetPageState extends State<MyClosetPage> {
                           width: 48,
                         ),
                         Column(children: [
-                          Text(clothes[index].isNeedStyler ? "스타일러가 필요해요 ;)" : '이 옷은 괜찮아요!'),
+                          Text(clothes[index].isNeedStyler
+                              ? "스타일러가 필요해요 ;)"
+                              : '이 옷은 괜찮아요!'),
                           Text(clothes[index].name)
                         ]),
                         Image.asset(
-                          clothes[index].isNeedStyler ? 'assets/images/icon_feather_bookmark.png' : 'assets/images/icon_feather_bookmark_blue.png',
+                          clothes[index].isNeedStyler
+                              ? 'assets/images/icon_feather_bookmark.png'
+                              : 'assets/images/icon_feather_bookmark_blue.png',
                           width: 24,
                         ),
                       ],
@@ -71,10 +95,14 @@ class _MyClosetPageState extends State<MyClosetPage> {
                     Column(
                       children: [
                         spacer_2x,
-                        Text('상세 정보'),
-                        Text('등록일: 2021. 10. 01\n마지막 스타일러 가동일: 2021. 10. 07 '),
-                        Image.asset('assets/images/sample_clothes.png', width: MediaQuery.of(context).size.width * 0.6,),
-                        Text("카테고리: 상의 > 후드 티셔츠\n색상: 블루\n스타일링 코스: 선택 안함\n고급건조 코스: 표준건조\n살균: 표준살균"),
+                        Text('상세 정보', textAlign: TextAlign.end, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text('등록일: 2021. 10. 01\n마지막 스타일러 가동일: 2021. 10. 07 ', textAlign: TextAlign.end,),
+                        Image.asset(
+                          'assets/images/sample_clothes.png',
+                          width: MediaQuery.of(context).size.width * 0.6,
+                        ),
+                        Text(
+                            "카테고리: 상의 > 후드 티셔츠\n색상: 블루\n스타일링 코스: 선택 안함\n고급건조 코스: 표준건조\n살균: 표준살균"),
                       ],
                     )
                   ],
@@ -83,6 +111,14 @@ class _MyClosetPageState extends State<MyClosetPage> {
             );
           },
         ));
+  }
+
+  void _asyncMethod() async {
+    // 디바이스에서 이용가능한 카메라 목록을 받아옵니다.
+    cameras = await availableCameras();
+
+    // 이용가능한 카메라 목록에서 특정 카메라를 얻습니다.
+    firstCamera = cameras.first;
   }
 }
 

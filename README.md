@@ -34,3 +34,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## Setting Up flutterfire 
+
+```
+# Install the CLI if not already done so
+dart pub global activate flutterfire_cli
+
+# 환경변수 설정 후 flutterfire 커맨드 사용 가능 
+
+# Run the `configure` command, select a Firebase project and platforms
+flutterfire configure
+```
