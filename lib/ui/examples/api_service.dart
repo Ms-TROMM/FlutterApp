@@ -1,7 +1,7 @@
 import 'dart:convert'; // jsonDecode()
 
 import 'package:http/http.dart' as http;
-import 'package:ms_tromm/models/album.dart';
+import 'package:ms_tromm/ui/examples/album.dart';
 
 // testing network calls
 Future<Album> fetchAlbum() async {

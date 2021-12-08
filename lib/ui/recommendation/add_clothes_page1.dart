@@ -21,7 +21,6 @@ class AddClothesPage1 extends StatefulWidget {
 class _AddClothesPage1State extends State<AddClothesPage1> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
-  String picturePath = '';
 
   @override
   void initState() {
@@ -60,10 +59,6 @@ class _AddClothesPage1State extends State<AddClothesPage1> {
               }
             },
           ),
-          spacer,
-          TrommButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const AddClothesPage2()));
-          }, text: '다음')
         ]),
       ),
       floatingActionButton: FloatingActionButton(
@@ -85,10 +80,18 @@ class _AddClothesPage1State extends State<AddClothesPage1> {
 
             XFile picture = await _controller.takePicture();
             picture.saveTo(path);
-            // print("path to pic : ${picture.path}");
-            setState(() {
-              picturePath = path;
-            });
+            print("path to pic : ${picture.path}");
+
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => AddClothesPage2(
+                  // Pass the automatically generated path to
+                  // the DisplayPictureScreen widget.
+                  imagePath: picture.path,
+                ),
+              ),
+            );
+
           } catch (e) {
             // 만약 에러가 발생하면, 콘솔에 에러 로그를 남깁니다.
             print(e);

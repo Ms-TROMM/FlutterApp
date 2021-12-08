@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ms_tromm/ui/widgets/spacer.dart';
 import 'package:ms_tromm/ui/widgets/tromm_button.dart';
 
 class AddClothesPage2 extends StatefulWidget {
-  const AddClothesPage2({Key? key}) : super(key: key);
+  final String imagePath;
+
+  const AddClothesPage2({Key? key, required this.imagePath}) : super(key: key);
 
   @override
   _AddClothesPage2State createState() => _AddClothesPage2State();
@@ -23,7 +27,6 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
 
   @override
   Widget build(BuildContext context) {
-
     TextStyle style = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 
     return Scaffold(
@@ -37,16 +40,25 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('옷 이름', style: style,),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.file(File(widget.imagePath), fit: BoxFit.fill,)
+              ),
+              spacer,
+              Text(
+                '옷 이름',
+                style: style,
+              ),
               spacer,
               TextFormField(
                 enableSuggestions: false,
                 autocorrect: false,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: '이름을 입력해주세요! (최대 8글자)', isDense: true),
-                validator: (value) {
-                },
+                    border: OutlineInputBorder(),
+                    hintText: '이름을 입력해주세요! (최대 8글자)',
+                    isDense: true),
+                validator: (value) {},
                 onChanged: (value) {
                   if (value.isNotEmpty) {
                     setState(() {
@@ -56,14 +68,19 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
                 },
               ),
               spacer_2x,
-              Text('카테고리', style: style,),
+              Text(
+                '카테고리',
+                style: style,
+              ),
               DropdownButton<String>(
                 isExpanded: true,
                 value: selectedValue1,
                 items: selection1.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value,),
+                    child: Text(
+                      value,
+                    ),
                   );
                 }).toList(),
                 onChanged: (value) {
@@ -73,7 +90,10 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
                 },
               ),
               spacer_2x,
-              Text('하위카테고리', style: style,),
+              Text(
+                '하위카테고리',
+                style: style,
+              ),
               DropdownButton<String>(
                 isExpanded: true,
                 value: selectedValue2,
@@ -90,7 +110,10 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
                 },
               ),
               spacer_2x,
-              Text('색상', style: style,),
+              Text(
+                '색상',
+                style: style,
+              ),
               DropdownButton<String>(
                 isExpanded: true,
                 value: selectedValue3,
@@ -107,7 +130,10 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
                 },
               ),
               spacer_2x,
-              Text('재질', style: style,),
+              Text(
+                '재질',
+                style: style,
+              ),
               DropdownButton<String>(
                 isExpanded: true,
                 value: selectedValue4,
@@ -124,9 +150,11 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
                 },
               ),
               spacer_2x,
-              TrommButton(onPressed: (){
-                // TODO POST 요청 날리기
-              }, text: '등록하기')
+              TrommButton(
+                  onPressed: () {
+                    // TODO POST 요청 날리기
+                  },
+                  text: '등록하기')
             ],
           ),
         ),
@@ -134,4 +162,3 @@ class _AddClothesPage2State extends State<AddClothesPage2> {
     );
   }
 }
-
