@@ -44,7 +44,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 onToggle: (value) {
                   setState(() {
                     isSwitched = !isSwitched;
-                    getPushPermission(isSwitched);
                   });
                 },
               ),
@@ -83,21 +82,6 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
-Future<void> getPushPermission(bool isSwitched) async {
-  if(!isSwitched) return;
-
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true
-  );
-  print('User granted permission: ${settings.authorizationStatus}');
-}
 
 // The authorizationStatus property can return a value which can be used to determine the users overall decision:
 //
