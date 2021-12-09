@@ -31,7 +31,7 @@ class _MoistureBoxState extends State<MoistureBox> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Text("현재 우리집", style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold,)),
-                Text("21℃ /60%", style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium,)),
+                Text("22℃ / 70%", style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium,)),
               ],
             ),
           ),
