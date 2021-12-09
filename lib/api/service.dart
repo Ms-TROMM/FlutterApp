@@ -59,6 +59,18 @@ class ApiService {
       "recommands/control/1";
 
   // my closet related endpoints
+  // {
+  // "clothe_type": "onepiece",
+  // "color:": 292929,
+  // "created_at": "Thu, 02 Dec 2021 09:11:56 GMT",
+  // "id": 1,
+  // "is_inside_styler": 1,
+  // "name": "정장",
+  // "need_styler": 0,
+  // "stylered_at": "Thu, 02 Dec 2021 09:11:56 GMT",
+  // "sub_type": 3,
+  // "texture": "울"
+  // },
   static const getAllUserClothes = "users/clothes/1";
 
   // POST Body
@@ -88,21 +100,45 @@ class ApiService {
   // }
   static const patchStylerState = "state/styler/1";
 
-  Future<TodayRecommendationData> fetchTodayRecommendation() async {
-    final textResponse =
-        await http.get(Uri.parse(url + getTodayRecommendationText));
-    final listItemResponse =
-        await http.get(Uri.parse(url + getTodayRecommendationListItems));
+// Future<TodayRecommendationData> fetchTodayRecommendation() async {
+//   final textResponse =
+//       await http.get(Uri.parse(url + getTodayRecommendationText));
+//   final listItemResponse =
+//       await http.get(Uri.parse(url + getTodayRecommendationListItems));
+//
+//   if (textResponse.statusCode == 200 && listItemResponse.statusCode == 200) {
+//     // parse json
+//     TodayRecommendationTextData data = TodayRecommendationTextData.fromJson(jsonDecode(textResponse.body));
+//
+//   }
+// }
 
-    if (textResponse.statusCode == 200 && listItemResponse.statusCode == 200) {
-      // parse json
-      TodayRecommendationTextData data = TodayRecommendationTextData.fromJson(jsonDecode(textResponse.body));
-      TodayRecommendationListItems items = TodayRecommendationListItems()
+  Future<List<UserClothes>> fetchUserClothes() async {
+    final response = await http.get(Uri.parse(url + getAllUserClothes));
+    List<UserClothes> listOfUserClothes = [];
+
+    if (response.statusCode == 200) {
+      List<dynamic> list = <dynamic>[];
+      list = json.decode(response.body);
+      if (list.isNotEmpty) {
+        for(int i = 0; i < list.length; i++) {
+          if (list[i] != null) {
+            Map<String, dynamic> map = list[i];
+            listOfUserClothes.add(UserClothes.fromJson(map));
+            print("clothes ${map['created_at']}");
+          }
+        }
+      }
+      return Future.value(listOfUserClothes);
+    } else {
+      throw Exception();
     }
   }
+
 }
 
 class TodayRecommendationData {}
+
 class TodayRecommendationTextData {
   int daily = 0;
   int max_temp = 4;
@@ -122,9 +158,50 @@ class TodayRecommendationTextData {
         min_temp: json['min_temp'],
         name: json['name']);
   }
-
 }
 
-class TodayRecommendationListItems {
+class UserClothes {
+  int id = 1;
+  String clothe_type = "onepiece";
+  String color = "292929"; // toInt 필요
+  String created_at = "Thu, 02 Dec 2021 09:11:56 GMT";
+  String stylered_at = "Thu, 02 Dec 2021 09:11:56 GMT";
+  String name = "정장";
+  int is_inside_styler = 1;
+  int need_styler = 0;
+  int sub_type = 3;
+  String texture = "울";
 
+  UserClothes(
+      {required this.id,
+      required this.clothe_type,
+      required this.color,
+      required this.created_at,
+      required this.stylered_at,
+      required this.name,
+      required this.is_inside_styler,
+      required this.need_styler,
+      required this.sub_type,
+      required this.texture});
+
+  factory UserClothes.fromJson(Map<String, dynamic> json) {
+    return UserClothes(
+        id: json['id'],
+        clothe_type: json['clothe_type'],
+        color: json['color'],
+        created_at: json['created_at'],
+        stylered_at: json['stylered_at'],
+        name: json['name'],
+        is_inside_styler: json['is_inside_styler'],
+        need_styler: json['need_styler'],
+        sub_type: json['sub_type'],
+        texture: json['texture']);
+  }
+
+  @override
+  String toString() {
+    return 'UserClothes{id: $id, clothe_type: $clothe_type, color: $color, created_at: $created_at, stylered_at: $stylered_at, name: $name, is_inside_styler: $is_inside_styler, need_styler: $need_styler, sub_type: $sub_type, texture: $texture}';
+  }
 }
+
+class TodayRecommendationListItems {}

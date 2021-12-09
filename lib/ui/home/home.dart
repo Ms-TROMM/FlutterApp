@@ -7,6 +7,8 @@ import 'package:ms_tromm/ui/home/weather_box.dart';
 import 'package:ms_tromm/ui/recommendation/recommendation_page.dart';
 import 'package:ms_tromm/ui/settings/settings.dart';
 import 'package:ms_tromm/ui/styler/styler2.dart';
+import 'package:ms_tromm/ui/theme/colors.dart';
+import 'package:ms_tromm/ui/theme/dimens.dart';
 
 import 'alert_page.dart';
 import 'moisture_box.dart';
@@ -21,13 +23,16 @@ void main() {
 
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  final ValueNotifier<bool> isOnNoti;
+  const MainPage({Key? key, required this.isOnNoti}) : super(key: key);
 
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
+  bool isOnDry = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +69,74 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
             const StylerControlBox(),
-            const MoistureBox()
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0), color: MyColor.secondary),
+          height: MediaQuery.of(context).size.width * 0.35,
+          margin: const EdgeInsets.only(bottom: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text("현재 우리집", style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold,)),
+                    Text("21℃ /60%", style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium,)),
+                  ],
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("실내제습"),
+                          Switch(
+                            value: widget.isOnNoti.value,
+                            onChanged: (value) {
+                              setState(() {
+                                widget.isOnNoti.value = !widget.isOnNoti.value;
+                              });
+                            },
+                            activeTrackColor: MyColor.secondary,
+                            activeColor: Colors.blue,
+                          ),
+                        ],
+                      )
+                  ),
+                  Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("자동건조"),
+                          Switch(
+                            value: isOnDry,
+                            onChanged: (value) {
+                              setState(() {
+                                isOnDry = !isOnDry;
+                              });
+                            },
+                            activeTrackColor: MyColor.secondary,
+                            activeColor: Colors.blue,
+                          ),
+                        ],
+                      )
+                  )
+                ],
+              )
+            ],
+          ),
+        )
           ],
         ),
       ),
@@ -95,12 +167,21 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   late FirebaseMessaging messaging;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    MainPage(),
+  ValueNotifier<bool> isOn = ValueNotifier(false);
+
+  final List<Widget> _widgetOptions = <Widget>[
+    MainPage(isOnNoti: ValueNotifier(false)),
     RecommendationPage(),
     Styler2(),
     SettingsPage(),
   ];
+
+  Widget getWidget(int index) {
+    if (index == 0) {
+      return MainPage(isOnNoti: isOn);
+    }
+    return _widgetOptions.elementAt(index);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -125,12 +206,22 @@ class _HomePageState extends State<HomePage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Notification"),
+              title: Text("MS. TROMM 알림"),
               content: Text(event.notification!.body!),
               actions: [
                 TextButton(
                   child: Text("Ok"),
                   onPressed: () {
+                    print('running ... ');
+                    if (event.notification!.body!.contains('제습')) {
+                      setState(() {
+                        isOn.value = true;
+                      });
+                    } else if (event.notification!.body!.contains('추천')) {
+                      setState(() {
+                        _selectedIndex = 1;
+                      });
+                    }
                     Navigator.of(context).pop();
                   },
                 )
@@ -175,11 +266,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: ValueListenableBuilder<bool>(
+        valueListenable: isOn,
+        builder: (context, value, child){
+          return Center(
+            child: getWidget(_selectedIndex),
+          );
+        },
       ),
       bottomNavigationBar: _getBottomNavigationBar(),
     );
   }
+
 }
+
 
