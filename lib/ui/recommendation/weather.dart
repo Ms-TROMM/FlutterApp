@@ -18,8 +18,8 @@ class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(16),
-            child: _getRecommendText("홍길동"),
+            padding: const EdgeInsets.all(24),
+            child: _getRecommendText("김엘지"),
           ),
           Container(
             child: _getRecommendList(),
@@ -33,7 +33,7 @@ class _WeatherRecommendPageState extends State<WeatherRecommendPage> {
     return Text(
       '$name님 안녕하세요!\n오늘 낮기온은 18℃, 밤기온은 5℃로 일교차가 매우 큰 날씨입니다. 오늘은 두꺼운 가디건이 어떨까요?',
       style: const TextStyle(
-          fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold),
+          fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.w500),
     );
   }
 

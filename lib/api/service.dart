@@ -15,6 +15,8 @@ Future<Album> fetchAlbum() async {
   }
 }
 
+ApiService apiService = ApiService();
+
 class ApiService {
   static const url = "https://ms-tromm.herokuapp.com/";
 
@@ -116,25 +118,29 @@ class ApiService {
   Future<List<UserClothes>> fetchUserClothes() async {
     final response = await http.get(Uri.parse(url + getAllUserClothes));
     List<UserClothes> listOfUserClothes = [];
+    List<UserClothes> defaultListOfUserClothes = [
+      UserClothes(id: 1, clothe_type: "onepiece", color: 292929, created_at: "Thu, 02 Dec 2021 09:11:56 GMT", stylered_at: "Thu, 02 Dec 2021 09:11:56 GMT", name: "상의", is_inside_styler: 1, need_styler: 1, sub_type: 1, texture: "면")
+    ];
+
 
     if (response.statusCode == 200) {
       List<dynamic> list = <dynamic>[];
       list = json.decode(response.body);
+      print(list);
       if (list.isNotEmpty) {
-        for(int i = 0; i < list.length; i++) {
+        for (int i = 0; i < list.length; i++) {
           if (list[i] != null) {
             Map<String, dynamic> map = list[i];
             listOfUserClothes.add(UserClothes.fromJson(map));
-            print("clothes ${map['created_at']}");
+            //print("clothes ${map['created_at']}");
           }
         }
       }
       return Future.value(listOfUserClothes);
     } else {
-      throw Exception();
+      return Future.value(defaultListOfUserClothes);
     }
   }
-
 }
 
 class TodayRecommendationData {}
@@ -163,7 +169,7 @@ class TodayRecommendationTextData {
 class UserClothes {
   int id = 1;
   String clothe_type = "onepiece";
-  String color = "292929"; // toInt 필요
+  int color = 292929;
   String created_at = "Thu, 02 Dec 2021 09:11:56 GMT";
   String stylered_at = "Thu, 02 Dec 2021 09:11:56 GMT";
   String name = "정장";
@@ -184,11 +190,11 @@ class UserClothes {
       required this.sub_type,
       required this.texture});
 
-  factory UserClothes.fromJson(Map<String, dynamic> json) {
+  factory UserClothes.fromJson(Map<String?, dynamic> json) {
     return UserClothes(
         id: json['id'],
         clothe_type: json['clothe_type'],
-        color: json['color'],
+        color: json['color:'],
         created_at: json['created_at'],
         stylered_at: json['stylered_at'],
         name: json['name'],
@@ -200,7 +206,10 @@ class UserClothes {
 
   @override
   String toString() {
-    return 'UserClothes{id: $id, clothe_type: $clothe_type, color: $color, created_at: $created_at, stylered_at: $stylered_at, name: $name, is_inside_styler: $is_inside_styler, need_styler: $need_styler, sub_type: $sub_type, texture: $texture}';
+    return 'UserClothes{id: $id, clothe_type: $clothe_type, color: $color, '
+        'created_at: $created_at, stylered_at: $stylered_at, name: $name, '
+        'is_inside_styler: $is_inside_styler, need_styler: $need_styler, '
+        'sub_type: $sub_type, texture: $texture}';
   }
 }
 

@@ -217,7 +217,8 @@ class _HomePageState extends State<HomePage> {
                       setState(() {
                         isOn.value = true;
                       });
-                    } else if (event.notification!.body!.contains('추천')) {
+                    }
+                    else if (event.notification!.body!.contains('추천')) {
                       setState(() {
                         _selectedIndex = 1;
                       });

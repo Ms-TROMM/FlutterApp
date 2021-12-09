@@ -18,8 +18,8 @@ class _ControlRecommendPageState extends State<ControlRecommendPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(16),
-            child: _getRecommendText("홍길동"),
+            padding: const EdgeInsets.all(24),
+            child: _getRecommendText("김엘지"),
           ),
           Container(
             child: _getRecommendList(),
@@ -33,7 +33,7 @@ class _ControlRecommendPageState extends State<ControlRecommendPage> {
     return Text(
       '$name님 안녕하세요!\n현재 집 안 온도는 22℃로 유지되고 있습니다. 스타일러 내에 정장이 있습니다. 고급의류 코스를 추천합니다!',
       style: const TextStyle(
-          fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold),
+          fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.w500),
     );
   }
 

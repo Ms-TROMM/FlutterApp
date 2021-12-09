@@ -49,6 +49,7 @@ dependencies:
   flutter_local_notifications: ^9.1.4
   flutter_notification_channel: ^2.0.0
   camera: ^0.9.4+5
+  modal_bottom_sheet: ^2.0.0
 
 dev_dependencies:
   flutter_test:

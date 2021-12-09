@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ms_tromm/models/connectable.dart';
 import 'package:ms_tromm/models/smart_mirror.dart';
 import 'package:ms_tromm/models/styler.dart';
+import 'package:ms_tromm/ui/widgets/spacer.dart';
 
 class StylerControlBox extends StatefulWidget {
   const StylerControlBox({Key? key}) : super(key: key);
@@ -111,12 +112,12 @@ class _StylerControlBoxState extends State<StylerControlBox> {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text('작동중'),
+              const Text('작동중', style: TextStyle(fontSize: 24, color: Colors.blue)),
               const Text(
                 "88:88",
-                style: TextStyle(fontFamily: 'DigitalMono', fontSize: 64),
+                style: TextStyle(fontFamily: 'DigitalMono', fontSize: 72),
               ),
               Row(
                 children: [
