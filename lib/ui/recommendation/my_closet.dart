@@ -18,7 +18,13 @@ class _MyClosetPageState extends State<MyClosetPage> {
   late List<CameraDescription> cameras;
   late CameraDescription firstCamera;
 
-  List<String> colors = ['흰색', '빨강색', '갈색', '파랑색'];
+  List<String> colors = ['블랙', '블랙', '블랙', '블루'];
+  List<String> images = [
+    'assets/images/sample_clothes3.png',
+    'assets/images/sample_clothes8.png',
+    'assets/images/sample_clothes5.png',
+    'assets/images/sample_clothes9.png'
+  ];
 
   @override
   void initState() {
@@ -81,7 +87,10 @@ class _MyClosetPageState extends State<MyClosetPage> {
                                 Column(children: [
                                   getNeedStylerText(
                                       snapshot.data![index].need_styler),
-                                  Text(snapshot.data![index].name, textAlign: TextAlign.center,)
+                                  Text(
+                                    snapshot.data![index].name,
+                                    textAlign: TextAlign.center,
+                                  )
                                 ]),
                                 Image.asset(
                                   snapshot.data![index].is_inside_styler == 0
@@ -105,21 +114,19 @@ class _MyClosetPageState extends State<MyClosetPage> {
                                   '등록일: ${snapshot.data![index].created_at}\n마지막 스타일러 가동일: ${snapshot.data![index].stylered_at}',
                                   textAlign: TextAlign.center,
                                 ),
+                                spacer,
                                 Image.asset(
-                                  index % 2 == 0
-                                      ? 'assets/images/sample_clothes.png'
-                                      : 'assets/images/sample_clothes_2.png',
+                                  images[index],
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,
                                 ),
+                                spacer,
                                 Text(
                                   "✅ 카테고리: ${getCategoryText(snapshot.data![index].clothe_type)} > "
-                                  "${getSubTypeText(snapshot.data![index].sub_type)}\n👨‍🎨 색상: ${colors[index % 4]}\n",
+                                  "${getSubTypeText(snapshot.data![index].sub_type)}\n✅ 색상: ${colors[index % 4]}\n✅ 소재: ${snapshot.data![index].texture}",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
-                                ),
-                                const Text("• 스타일링 코스: 선택 안함\n• 고급건조 코스: 표준건조\n• 살균: 표준살균",
-                                textAlign: TextAlign.center,)
+                                )
                               ],
                             )
                           ],
@@ -170,18 +177,20 @@ class _MyClosetPageState extends State<MyClosetPage> {
 
   getSubTypeText(int sub_type) {
     String t = '';
+
     if (sub_type == 1) {
-      t = '후드티';
+      t = '티셔츠';
+    } else if (sub_type == 2){
+      t = '셔츠';
+    } else if (sub_type == 3) {
+      t = '블레이저';
+    } else if (sub_type == 4){
+      t = '추리닝 바지';
     } else {
-      t = '와이셔츠';
+      t = '청자켓';
     }
     return t;
   }
-//
-// getDateTimeString(String date) {
-//
-//   return
-// }
 
 }
 
