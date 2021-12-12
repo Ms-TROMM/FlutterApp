@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: const Text('닫기')),
                 ],
-              );;
+              );
             });
       } else {
         showDialog(
