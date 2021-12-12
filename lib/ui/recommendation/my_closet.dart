@@ -33,7 +33,7 @@ class _MyClosetPageState extends State<MyClosetPage> {
       _asyncMethod();
     });
 
-    userClothesFuture = apiService.fetchUserClothes();
+    userClothesFuture = apiService.fetchUserClothes(1);
   }
 
   @override
@@ -124,7 +124,7 @@ class _MyClosetPageState extends State<MyClosetPage> {
                                 Text(
                                   "✅ 카테고리: ${getCategoryText(snapshot.data![index].clothe_type)} > "
                                   "${getSubTypeText(snapshot.data![index].sub_type)}\n✅ 색상: ${colors[index % 4]}\n✅ 소재: ${snapshot.data![index].texture}",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 )
                               ],
@@ -180,31 +180,15 @@ class _MyClosetPageState extends State<MyClosetPage> {
 
     if (sub_type == 1) {
       t = '티셔츠';
-    } else if (sub_type == 2){
+    } else if (sub_type == 2) {
       t = '셔츠';
     } else if (sub_type == 3) {
       t = '블레이저';
-    } else if (sub_type == 4){
+    } else if (sub_type == 4) {
       t = '추리닝 바지';
     } else {
       t = '청자켓';
     }
     return t;
   }
-
-}
-
-class Clothes {
-  int id;
-  String name;
-  String category;
-  int color;
-  int subtype;
-  String texture;
-  bool isNeedStyler;
-  String createdAt;
-  String styleredAt;
-
-  Clothes(this.id, this.name, this.category, this.color, this.subtype,
-      this.texture, this.isNeedStyler, this.createdAt, this.styleredAt);
 }

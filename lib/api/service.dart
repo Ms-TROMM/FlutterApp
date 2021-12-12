@@ -73,7 +73,7 @@ class ApiService {
   // "sub_type": 3,
   // "texture": "울"
   // },
-  static const getAllUserClothes = "users/clothes/1";
+  static const getAllUserClothes = "users/clothes/";
 
   // POST Body
   //     {
@@ -115,13 +115,12 @@ class ApiService {
 //   }
 // }
 
-  Future<List<UserClothes>> fetchUserClothes() async {
-    final response = await http.get(Uri.parse(url + getAllUserClothes));
+  Future<List<UserClothes>> fetchUserClothes(int userId) async {
+    final response = await http.get(Uri.parse(url + getAllUserClothes + userId.toString()));
     List<UserClothes> listOfUserClothes = [];
     List<UserClothes> defaultListOfUserClothes = [
       UserClothes(id: 1, clothe_type: "onepiece", color: 292929, created_at: "Thu, 02 Dec 2021 09:11:56 GMT", stylered_at: "Thu, 02 Dec 2021 09:11:56 GMT", name: "상의", is_inside_styler: 1, need_styler: 1, sub_type: 1, texture: "면")
     ];
-
 
     if (response.statusCode == 200) {
       List<dynamic> list = <dynamic>[];
