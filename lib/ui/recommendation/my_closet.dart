@@ -64,12 +64,21 @@ class _MyClosetPageState extends State<MyClosetPage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: EdgeInsets.all(8),
-                      padding: EdgeInsets.all(16),
+                      margin: EdgeInsets.all(16),
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blue, width: 1),
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(10))),
+                              const BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 5,
+                              blurRadius: 10,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ]),
                       child: Padding(
                         padding: EdgeInsets.all(16),
                         child: Column(
@@ -124,7 +133,8 @@ class _MyClosetPageState extends State<MyClosetPage> {
                                 Text(
                                   "✅ 카테고리: ${getCategoryText(snapshot.data![index].clothe_type)} > "
                                   "${getSubTypeText(snapshot.data![index].sub_type)}\n✅ 색상: ${colors[index % 4]}\n✅ 소재: ${snapshot.data![index].texture}",
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 )
                               ],

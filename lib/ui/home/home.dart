@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ms_tromm/api/service.dart';
 import 'package:ms_tromm/ui/home/recommendation_box.dart';
 import 'package:ms_tromm/ui/home/styler_control_box.dart';
 import 'package:ms_tromm/ui/home/weather_box.dart';
@@ -9,6 +10,7 @@ import 'package:ms_tromm/ui/settings/settings.dart';
 import 'package:ms_tromm/ui/styler/styler2.dart';
 import 'package:ms_tromm/ui/theme/colors.dart';
 import 'package:ms_tromm/ui/theme/dimens.dart';
+import 'package:ms_tromm/ui/widgets/alert_dialog.dart';
 
 import 'alert_page.dart';
 import 'moisture_box.dart';
@@ -21,9 +23,9 @@ void main() {
   ));
 }
 
-
 class MainPage extends StatefulWidget {
   final ValueNotifier<bool> isOnNoti;
+
   const MainPage({Key? key, required this.isOnNoti}) : super(key: key);
 
   @override
@@ -69,74 +71,85 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
             const StylerControlBox(),
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25.0), color: MyColor.secondary),
-          height: MediaQuery.of(context).size.width * 0.35,
-          margin: const EdgeInsets.only(bottom: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text("현재 우리집", style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium, fontWeight: FontWeight.bold,)),
-                    Text("21℃ / 70%", style: TextStyle(fontSize: MyDimens.FontSize_ExtraMedium,)),
-                  ],
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: MyColor.secondary),
+              height: MediaQuery.of(context).size.width * 0.35,
+              margin: const EdgeInsets.only(bottom: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("실내제습"),
-                          Switch(
-                            value: widget.isOnNoti.value,
-                            onChanged: (value) {
-                              setState(() {
-                                widget.isOnNoti.value = !widget.isOnNoti.value;
-                              });
-                            },
-                            activeTrackColor: MyColor.secondary,
-                            activeColor: Colors.blue,
-                          ),
-                        ],
-                      )
+                  Padding(
+                    padding: const EdgeInsets.only(right: 24),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text("현재 우리집",
+                            style: TextStyle(
+                              fontSize: MyDimens.FontSize_ExtraMedium,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        Text("21℃ / 70%",
+                            style: TextStyle(
+                              fontSize: MyDimens.FontSize_ExtraMedium,
+                            )),
+                      ],
+                    ),
                   ),
-                  Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("자동건조"),
-                          Switch(
-                            value: isOnDry,
-                            onChanged: (value) {
-                              setState(() {
-                                isOnDry = !isOnDry;
-                              });
-                            },
-                            activeTrackColor: MyColor.secondary,
-                            activeColor: Colors.blue,
-                          ),
-                        ],
-                      )
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.white),
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("실내제습"),
+                              Switch(
+                                value: widget.isOnNoti.value,
+                                onChanged: (value) {
+                                  setState(() {
+                                    widget.isOnNoti.value =
+                                        !widget.isOnNoti.value;
+                                  });
+                                },
+                                activeTrackColor: MyColor.secondary,
+                                activeColor: Colors.blue,
+                              ),
+                            ],
+                          )),
+                      Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.white),
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("자동건조"),
+                              Switch(
+                                value: isOnDry,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isOnDry = !isOnDry;
+                                  });
+                                },
+                                activeTrackColor: MyColor.secondary,
+                                activeColor: Colors.blue,
+                              ),
+                            ],
+                          ))
+                    ],
                   )
                 ],
-              )
-            ],
-          ),
-        )
+              ),
+            )
           ],
         ),
       ),
@@ -154,7 +167,6 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -201,34 +213,52 @@ class _HomePageState extends State<HomePage> {
     FirebaseMessaging.onMessage.listen((RemoteMessage event) {
       print("message recieved");
       print(event.notification!.body);
-
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("MS. TROMM 알림"),
-              content: Text(event.notification!.body!),
-              actions: [
-                TextButton(
-                  child: Text("Ok"),
-                  onPressed: () {
-                    print('running ... ');
-                    if (event.notification!.body!.contains('제습')) {
-                      setState(() {
-                        isOn.value = true;
-                      });
-                    }
-                    else if (event.notification!.body!.contains('추천')) {
-                      setState(() {
-                        _selectedIndex = 1;
-                      });
-                    }
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
+      if (event.notification!.title == 'feedback') {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('피드백'),
+                content: FeedbackContainer(),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('닫기')),
+                ],
+              );;
+            });
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("MS. TROMM 알림"),
+                content: Text(event.notification!.body!),
+                actions: [
+                  TextButton(
+                    child: Text("Ok"),
+                    onPressed: () {
+                      print('running ... ');
+                      print(
+                          '${event.notification!.title} ${event.notification!.body}');
+                      if (event.notification!.body!.contains('제습')) {
+                        setState(() {
+                          isOn.value = true;
+                        });
+                      } else if (event.notification!.body!.contains('추천')) {
+                        setState(() {
+                          _selectedIndex = 1;
+                        });
+                      }
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
+      }
 
       FirebaseMessaging.onMessageOpenedApp.listen((message) {
         print('Message clicked!');
@@ -236,40 +266,40 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-    _getBottomNavigationBar() {
-      return BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '홈',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.thumb_up),
-            label: '추천',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_laundry_service),
-            label: '스타일러',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: '설정',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
-      );
-    }
+  _getBottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: '홈',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.thumb_up),
+          label: '추천',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.local_laundry_service),
+          label: '스타일러',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.menu),
+          label: '설정',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.blue,
+      unselectedItemColor: Colors.grey,
+      onTap: _onItemTapped,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ValueListenableBuilder<bool>(
         valueListenable: isOn,
-        builder: (context, value, child){
+        builder: (context, value, child) {
           return Center(
             child: getWidget(_selectedIndex),
           );
@@ -278,7 +308,4 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: _getBottomNavigationBar(),
     );
   }
-
 }
-
-

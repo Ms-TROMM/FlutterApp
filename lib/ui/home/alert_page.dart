@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ms_tromm/ui/widgets/alert_dialog.dart';
 
 class AlertPage extends StatefulWidget {
   const AlertPage({Key? key}) : super(key: key);
@@ -9,6 +10,12 @@ class AlertPage extends StatefulWidget {
 }
 
 class _AlertPageState extends State<AlertPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +23,6 @@ class _AlertPageState extends State<AlertPage> {
         title: const Text('알림')
       ),
       body: Container(
-
       ),
     );
   }
